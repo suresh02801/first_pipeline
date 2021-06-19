@@ -27,7 +27,7 @@ pipeline {
         steps{
 		script{
 		echo bat(returnStdout: true, script: 'set')
-                echo bat(script: "echo GIT_BRANCH | cut -d'/' -f 1" , returnStdout: true).trim()
+                echo bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 		}
            }
       }
