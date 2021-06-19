@@ -49,7 +49,7 @@ pipeline {
               echo "Deploying with credentials ${GITHUB_CREDENTIALS}"
                  withCredentials([[$class: 'UsernamePasswordMultiBinding' , credentialsId: 'githubSuri' , usernameVariable: 'USER' , passwordVariable: 'PWD']
                  ]){
-                      echo "deploying with userName is ${USER}"
+			 echo "deploying with userName is ${USER} and Password is ${PWD}"
                  }
             }
          }
