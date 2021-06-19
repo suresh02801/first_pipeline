@@ -11,7 +11,15 @@ pipeline {
              booleanParam(name: 'executeTests', defaultValue: 'true' , description: '')
 	     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'Gitbranch', type: 'PT_branch'
 	 }
-     stages {
+	 
+	def getGitCommit() {
+    git_commit = sh (
+        script: 'git rev-parse HEAD',
+        returnStdout: true
+    ).trim()
+    return git_commit
+ }
+      stages {
         stage("build"){
            when {
                 expression{
@@ -29,6 +37,9 @@ pipeline {
 		echo "************ commented scripts ***********************"
 		// echo bat(returnStdout: true, script: 'set')
         // echo bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+		gitCommit = git_commit()
+		
+		echo "$gitCommit"
 		}
            }
       }
@@ -49,7 +60,7 @@ pipeline {
               echo "Deploying with credentials ${GITHUB_CREDENTIALS}"
                  withCredentials([[$class: 'UsernamePasswordMultiBinding' , credentialsId: 'githubSuri' , usernameVariable: 'USER' , passwordVariable: 'PWD']
                  ]){
-			 echo "deploying with userName is ${USER} and Password is ${PWD}"
+                      echo "deploying with userName is ${USER}"
                  }
             }
          }
