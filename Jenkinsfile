@@ -26,8 +26,9 @@ pipeline {
       stage("branchTest"){
         steps{
 		script{
-		echo bat(returnStdout: true, script: 'set')
-        echo bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+		echo "************ commented scripts ***********************"
+		// echo bat(returnStdout: true, script: 'set')
+        // echo bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 		}
            }
       }
