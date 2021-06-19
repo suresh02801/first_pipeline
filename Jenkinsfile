@@ -9,7 +9,7 @@ pipeline {
 	     //string(name: 'VERSION', defaultValue : '' , description: "Value of Version")
 	     choice(name: 'VERSION', choices: ['1.3.0', '1.4.0', '1.5.0'], description: 'choose version of value')
              booleanParam(name: 'executeTests', defaultValue: 'true' , description: '')
-	     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'branch', type: 'PT_branch'
+	     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'Gitbranch', type: 'PT_branch'
 	 }
      stages {
         stage("build"){
@@ -27,7 +27,7 @@ pipeline {
         steps{
 		script{
 		echo bat(returnStdout: true, script: 'set')
-                echo bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        echo bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 		}
            }
       }
